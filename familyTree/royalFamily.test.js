@@ -13,7 +13,7 @@ describe("Check that we receive an array of Generation classes from findGenerati
     );
   });
 
-  test("Checking that everyone who has defined parents has them initiated", () => {
+  test("Checking that everyone who has defined parents has them initiated, if not then just an empty array", () => {
     const noParents = [
       "King George VI",
       "Queen Elizabeth",
@@ -29,7 +29,7 @@ describe("Check that we receive an array of Generation classes from findGenerati
 
         // if it isn't a royal family member who has no defined parents
         if (noParents.includes(currentMember.name)) {
-          continue;
+          expect(currentMember.parents).toHaveLength(0);
         } else {
           expect(currentMember.parents).toHaveLength(2);
           expect(currentMember.parents[0]).toBeInstanceOf(
