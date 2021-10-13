@@ -26,7 +26,7 @@ class Generation {
     this.members.push(newMember);
   }
   findMember(personToFind) {
-    this.members.find((person) => person.name === personToFind);
+    return this.members.find((person) => person.name === personToFind);
   }
 }
 
@@ -37,6 +37,7 @@ const findGenerations = () => {
   for (let i = 0; i < generationCount; i++) {
     let generation = new Generation();
 
+    // Keep looping until the current generation in the JSON at the current index ends
     while (
       jsonIndex < generationData.length &&
       generationData[jsonIndex].generation == i
@@ -44,7 +45,7 @@ const findGenerations = () => {
       const memberObj = generationData[jsonIndex];
       let person = new Person(memberObj.name);
 
-      if (generations.length != 0) {
+      if (generations.length != 0 && memberObj.hasParents) {
         person.addParent(generations[i - 1].findMember(memberObj.parents[0]));
         person.addParent(generations[i - 1].findMember(memberObj.parents[1]));
       }
@@ -59,4 +60,4 @@ const findGenerations = () => {
   return generations;
 };
 
-console.log(findGenerations());
+console.log(findGenerations()[1].members[1].childOf());
