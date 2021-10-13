@@ -1,0 +1,52 @@
+[
+  {
+    "name": "King George VI",
+    "generation": 0,
+    "parents": ["", ""]
+  },
+  {
+    "name": "Queen Elizabeth",
+    "generation": 0,
+    "parents": ["", ""]
+  },
+  {
+    "name": "Prince Philip",
+    "generation": 1,
+    "parents": ["", ""]
+  },
+  {
+    "name": "Queen Elizabeth II",
+    "generation": 1,
+    "parents": ["King George VI", "Queen Elizabeth"]
+  },
+  {
+    "name": "Princess Margaret",
+    "generation": 1,
+    "parents": ["King George VI", "Queen Elizabeth"]
+  },
+  {
+    "name": "Camila",
+    "generation": 2,
+    "parents": ["", ""]
+  },
+  {
+    "name": "Charles",
+    "generation": 2,
+    "parents": ["Prince Philip", "Queen Elizabeth II"]
+  },
+  {
+    "name": "Diana",
+    "generation": 2,
+    "parents": ["", ""]
+  },
+  {
+    "name": "Anne",
+    "generation": 2,
+    "parents": ["Prince Philip", "Queen Elizabeth II"]
+  },
+  {
+    "name": "Prince Edward",
+    "generation": 2,
+    "parents": ["Prince Philip", "Queen Elizabeth II"]
+  }
+]

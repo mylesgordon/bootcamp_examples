@@ -1,45 +1,62 @@
 // Royal Family assignment
+const generationCount = 3;
+const generationData = require("./royalData.json");
 
 class Person {
-  constructor(name, parents) {
+  constructor(name) {
     this.name = name;
-    this.parents = parents;
-    this.childOf = () => {
-      return (
-        this.parents.map((parent) => parent.name).join(" & ") ||
-        "No known parents"
-      );
-    };
+    this.parents = [];
+  }
+  addParent(parent) {
+    this.parents.push(parent);
+  }
+  childOf() {
+    return (
+      this.parents.map((parent) => parent.name).join(" & ") ||
+      "No known parents"
+    );
   }
 }
 
-const generation1 = [
-  new Person("King George VI", []),
-  new Person("Queen Elizabeth", []),
-];
+class Generation {
+  constructor() {
+    this.members = [];
+  }
+  addMember(newMember) {
+    this.members.push(newMember);
+  }
+  findMember(personToFind) {
+    this.members.find((person) => person.name === personToFind);
+  }
+}
 
-const george_liz = [
-  generation1.find((person) => person.name === "King George VI"),
-  generation1.find((person) => person.name === "Queen Elizabeth"),
-];
+const findGenerations = () => {
+  let generations = [];
+  let jsonIndex = 0;
 
-const generation2 = [
-  new Person("Prince Philip", []),
-  new Person("Queen Elizabeth II", george_liz),
-  new Person("Princess Margaret", george_liz),
-];
+  for (let i = 0; i < generationCount; i++) {
+    let generation = new Generation();
 
-const phil_liz2 = [
-  generation2.find((person) => person.name === "Prince Philip"),
-  generation2.find((person) => person.name === "Queen Elizabeth II"),
-];
+    while (
+      jsonIndex < generationData.length &&
+      generationData[jsonIndex].generation == i
+    ) {
+      const memberObj = generationData[jsonIndex];
+      let person = new Person(memberObj.name);
 
-const generation3 = [
-  new Person("Camila", []),
-  new Person("Charles", phil_liz2),
-  new Person("Diana", []),
-  new Person("Anne", phil_liz2),
-  new Person("Prince Edward", phil_liz2),
-];
+      if (generations.length != 0) {
+        person.addParent(generations[i - 1].findMember(memberObj.parents[0]));
+        person.addParent(generations[i - 1].findMember(memberObj.parents[1]));
+      }
 
-console.log(generation3[3].childOf());
+      generation.addMember(person);
+      jsonIndex++;
+    }
+
+    generations.push(generation);
+  }
+
+  return generations;
+};
+
+console.log(findGenerations());
