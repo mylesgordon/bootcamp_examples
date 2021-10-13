@@ -1,11 +1,11 @@
 function addition(numbers) {
-    let result = 0;
+  let result = 0;
 
-    for (let i = 0; i < numbers.length; i++) {
-        result += numbers[i];
-    }
+  for (let i = 0; i < numbers.length; i++) {
+    result += numbers[i];
+  }
 
-    return result;
+  return result;
 }
 
-console.log(addition([1, 2, 5, 6]));
+module.exports = { addition };
