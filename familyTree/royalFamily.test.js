@@ -27,10 +27,11 @@ describe("Check that we receive an array of Generation classes from findGenerati
       for (let y = 0; y < currentGenerationMembers.length; y++) {
         const currentMember = currentGenerationMembers[y];
 
-        // if it isn't a royal family member who has no defined parents
+        // empty array if no parents
         if (noParents.includes(currentMember.name)) {
           expect(currentMember.parents).toHaveLength(0);
         } else {
+          // needs to have 2 parents, which are of type Parent
           expect(currentMember.parents).toHaveLength(2);
           expect(currentMember.parents[0]).toBeInstanceOf(
             royalFamilyModule.Person
