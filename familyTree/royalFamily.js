@@ -37,7 +37,7 @@ const findGenerations = () => {
   for (let i = 0; i < generationCount; i++) {
     let generation = new Generation();
 
-    // Keep looping until the current generation in the JSON at the current index ends
+    // Keep looping until the current generation in the JSON at the given index ends
     while (
       jsonIndex < generationData.length &&
       generationData[jsonIndex].generation == i
@@ -46,8 +46,9 @@ const findGenerations = () => {
       let person = new Person(memberObj.name);
 
       if (generations.length != 0 && memberObj.hasParents) {
-        person.addParent(generations[i - 1].findMember(memberObj.parents[0]));
-        person.addParent(generations[i - 1].findMember(memberObj.parents[1]));
+        const previousGeneration = generations[i - 1];
+        person.addParent(previousGeneration.findMember(memberObj.parents[0]));
+        person.addParent(previousGeneration.findMember(memberObj.parents[1]));
       }
 
       generation.addMember(person);
