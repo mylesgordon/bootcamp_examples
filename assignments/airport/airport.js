@@ -1,13 +1,28 @@
+class Check {
+  static isNumberValid(number) {
+    if (number === undefined || isNaN(number)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  static isStringValid(string) {
+    if (string == null || string.length === 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+}
+
 class Bag {
   constructor(weight) {
     this.weight = weight;
     this.isValidWeight();
   }
   isValidWeight() {
-    if (this.weight === undefined) {
-      throw "Bag must have a weight";
-    } else if (isNaN(this.weight)) {
-      throw "Bag weight must be a number";
+    if (!Check.isNumberValid(this.weight)) {
+      throw "Bag must have a valid weight";
     }
   }
   isOverLimit() {
@@ -27,7 +42,7 @@ class Passenger {
   isValidPassenger() {
     const toCheck = [this.name, this.passportNumber, this.seatNumber];
     toCheck.forEach((field) => {
-      if (field.length === 0 || field == null) {
+      if (!Check.isStringValid(field)) {
         throw "Passenger is not valid.";
       }
     });
@@ -37,8 +52,40 @@ class Passenger {
   }
 }
 
-class CrewMember {}
+class CrewMember {
+  constructor(name, position, staffNumber) {
+    this.name = name;
+    this.position = position;
+    this.staffNumber = staffNumber;
 
-class Plane {}
+    this.isValidCrewMember();
+  }
+  isValidCrewMember() {
+    if (
+      !Check.isStringValid(this.name) ||
+      !Check.isStringValid(this.position) ||
+      !Check.isNumberValid(this.staffNumber)
+    ) {
+      throw "Crew member is not valid.";
+    }
+  }
+}
+
+class Plane {
+  constructor(type) {
+    this.type = type;
+    this.passengers = [];
+
+    this.isPlaneValid();
+  }
+  isPlaneValid() {
+    if (!Check.isStringValid(this.type)) {
+      throw "Plane must have a type";
+    }
+  }
+  board(passenger) {
+    this.passengers.push(passenger);
+  }
+}
 
 module.exports = { Passenger, Bag, CrewMember, Plane };
