@@ -127,7 +127,7 @@ describe("Airport", () => {
     airport.planeLand(airplane);
     expect(airport.planes.length).toBe(1);
   });
-  test("Having a plane take off from", () => {
+  test("Having a plane take off from the airport", () => {
     airport.planeTakeOff(airplane);
     expect(airport.planes.length).toBe(0);
   });
