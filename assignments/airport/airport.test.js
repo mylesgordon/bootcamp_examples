@@ -104,16 +104,31 @@ describe("Plane", () => {
   });
 });
 
-// describe("Airport", () => {
-//   let underLimitBag = null,
-//     overLimitBag = null;
+describe("Airport", () => {
+  let airport = null,
+    airplane = null;
 
-//   beforeAll(() => {
-//     underLimitBag = new modAirport.Bag(50);
-//     overLimitBag = new modAirport.Bag(500);
-//   });
+  beforeAll(() => {
+    airport = new modAirport.Airport("Some Airport");
+    airplane = new modAirport.Plane("Boeing 747");
+  });
 
-//   test("Trying to create a bag without weight throws error", () => {
-//     expect(() => new modAirport.Bag()).toThrowError("Bag must have a weight");
-//   });
-// });
+  test("Trying to create an airport without a name throws error", () => {
+    expect(() => new modAirport.Airport()).toThrowError(
+      "Airport must have a valid name"
+    );
+  });
+  test("Trying to create an airport with an empty name throws error", () => {
+    expect(() => new modAirport.Airport("")).toThrowError(
+      "Airport must have a valid name"
+    );
+  });
+  test("Having a plane land at airport", () => {
+    airport.planeLand(airplane);
+    expect(airport.planes.length).toBe(1);
+  });
+  test("Having a plane take off from", () => {
+    airport.planeTakeOff(airplane);
+    expect(airport.planes.length).toBe(0);
+  });
+});

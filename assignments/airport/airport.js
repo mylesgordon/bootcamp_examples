@@ -71,10 +71,13 @@ class CrewMember {
   }
 }
 
+let planeID = 0;
+
 class Plane {
   constructor(type) {
     this.type = type;
     this.passengers = [];
+    this.planeID = planeID++;
 
     this.isPlaneValid();
   }
@@ -88,4 +91,25 @@ class Plane {
   }
 }
 
-module.exports = { Passenger, Bag, CrewMember, Plane };
+class Airport {
+  constructor(name) {
+    this.name = name;
+    this.planes = [];
+    this.isAirportValid();
+  }
+  isAirportValid() {
+    if (!Check.isStringValid(this.name)) {
+      throw "Airport must have a valid name";
+    }
+  }
+  planeTakeOff(plane) {
+    this.planes = this.planes.filter(
+      (planeElement) => planeElement.planeID != plane.planeID
+    );
+  }
+  planeLand(plane) {
+    this.planes.push(plane);
+  }
+}
+
+module.exports = { Passenger, Bag, CrewMember, Plane, Airport };
