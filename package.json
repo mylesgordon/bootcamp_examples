@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/mylesgordon/bootcamp_examples/issues"
   },
-  "homepage": "https://github.com/mylesgordon/bootcamp_examples#readme"
+  "homepage": "https://github.com/mylesgordon/bootcamp_examples#readme",
+  "devDependencies": {
+    "@types/jest": "^27.0.2"
+  }
 }
