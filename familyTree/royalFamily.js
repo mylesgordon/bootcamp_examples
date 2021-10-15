@@ -61,6 +61,4 @@ const findGenerations = () => {
   return generations;
 };
 
-console.log(findGenerations()[1].members[1].childOf());
-
 module.exports = { Person, Generation, findGenerations };
