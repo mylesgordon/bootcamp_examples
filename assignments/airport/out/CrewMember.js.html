@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Airport.js</title>
+    <title>JSDoc: Source: CrewMember.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Airport.js</h1>
+    <h1 class="page-title">Source: CrewMember.js</h1>
 
     
 
@@ -27,57 +27,42 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>const { Check } = require("./Check");
+const { Person } = require("./Person");
 
 /**
- * A class to represent an airport
+ * Class to represent a crew member on an airplane
  * @class
  */
-class Airport {
+class CrewMember extends Person {
   /**
-   * Contains all known airports
-   * @static
-   */
-  static airports = [];
-  /**
-   * An airport requires a valid name
+   * A crew member requires a valid name, position and staff number in order to be created.
    * @param {string} name
+   * @param {string} position
+   * @param {number} staffNumber
+   * @constructor
    */
-  constructor(name) {
-    this.name = name;
-    this.planes = [];
-    this.airportID = this.constructor.airports.length;
-    this.isAirportValid();
+  constructor(name, position, staffNumber) {
+    super(name);
+    this.position = position;
+    this.staffNumber = staffNumber;
 
-    this.constructor.airports.push(this);
+    this.isValidCrewMember();
   }
   /**
-   * Checks whether the airport name is a valid string
+   * Checks whether the name, position and staff number are all of valid, instantiated types
    */
-  isAirportValid() {
-    if (!Check.isStringValid(this.name)) {
-      throw "Airport must have a valid name";
+  isValidCrewMember() {
+    if (
+      !Check.isStringValid(this.name) ||
+      !Check.isStringValid(this.position) ||
+      !Check.isNumberValid(this.staffNumber)
+    ) {
+      throw "Crew member is not valid.";
     }
-  }
-  /**
-   * Handles when a specified plane take off, removing them from the planes array.
-   * @param {Plane} plane
-   */
-  planeTakeOff(plane) {
-    this.planes = this.planes.filter(
-      (planeElement) => planeElement.planeID != plane.planeID
-    );
-  }
-  /**
-   * Handles when a plane arrives, adding them to the planes array.
-   * @param {Plane} plane
-   */
-  planeLand(plane) {
-    plane.airportID = this.airportID;
-    this.planes.push(plane);
   }
 }
 
-module.exports = { Airport };
+module.exports = { CrewMember };
 </code></pre>
         </article>
     </section>

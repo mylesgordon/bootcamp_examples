@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Airport.js</title>
+    <title>JSDoc: Source: Passenger.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Airport.js</h1>
+    <h1 class="page-title">Source: Passenger.js</h1>
 
     
 
@@ -27,57 +27,41 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>const { Check } = require("./Check");
+const { Person } = require("./Person");
 
 /**
- * A class to represent an airport
+ * Class to represent a singular passenger on a plane
  * @class
  */
-class Airport {
+class Passenger extends Person {
   /**
-   * Contains all known airports
-   * @static
-   */
-  static airports = [];
-  /**
-   * An airport requires a valid name
+   * A passenger requires a valid name, passport number and seat number to be on a plane.
    * @param {string} name
+   * @param {string} passportNumber
+   * @param {string} seatNumber
+   * @constructor
    */
-  constructor(name) {
-    this.name = name;
-    this.planes = [];
-    this.airportID = this.constructor.airports.length;
-    this.isAirportValid();
+  constructor(name, passportNumber, seatNumber) {
+    super(name);
+    this.passportNumber = passportNumber;
+    this.seatNumber = seatNumber;
 
-    this.constructor.airports.push(this);
+    this.isValidPassenger();
   }
   /**
-   * Checks whether the airport name is a valid string
+   * Checks whether the name, passport number and seat number are all valid strings.
    */
-  isAirportValid() {
-    if (!Check.isStringValid(this.name)) {
-      throw "Airport must have a valid name";
-    }
-  }
-  /**
-   * Handles when a specified plane take off, removing them from the planes array.
-   * @param {Plane} plane
-   */
-  planeTakeOff(plane) {
-    this.planes = this.planes.filter(
-      (planeElement) => planeElement.planeID != plane.planeID
-    );
-  }
-  /**
-   * Handles when a plane arrives, adding them to the planes array.
-   * @param {Plane} plane
-   */
-  planeLand(plane) {
-    plane.airportID = this.airportID;
-    this.planes.push(plane);
+  isValidPassenger() {
+    const toCheck = [this.name, this.passportNumber, this.seatNumber];
+    toCheck.forEach((field) => {
+      if (!Check.isStringValid(field)) {
+        throw "Passenger is not valid.";
+      }
+    });
   }
 }
 
-module.exports = { Airport };
+module.exports = { Passenger };
 </code></pre>
         </article>
     </section>

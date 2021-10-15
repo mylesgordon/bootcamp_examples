@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: CrewMember</title>
+    <title>JSDoc: Class: Person</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: CrewMember</h1>
+    <h1 class="page-title">Class: Person</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>CrewMember<span class="signature">(name, position, staffNumber)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Person<span class="signature">(name)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Class to represent a crew member on an airplane</div>
+            <div class="class-description">Represents any person within the airport system, such as a passenger or crew member</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="CrewMember"><span class="type-signature"></span>new CrewMember<span class="signature">(name, position, staffNumber)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Person"><span class="type-signature"></span>new Person<span class="signature">(name)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    A crew member requires a valid name, position and staff number in order to be created.
+    The only requirement for a person is that they have a name
 </div>
 
 
@@ -109,52 +109,6 @@
         </tr>
 
     
-
-        <tr>
-            
-                <td class="name"><code>position</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>staffNumber</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
     </tbody>
 </table>
 
@@ -192,7 +146,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="CrewMember.js.html">CrewMember.js</a>, <a href="CrewMember.js.html#line8">line 8</a>
+        <a href="Person.js.html">Person.js</a>, <a href="Person.js.html#line7">line 7</a>
     </li></ul></dd>
     
 
@@ -248,7 +202,7 @@
     
 
     
-    <h4 class="name" id="isValidCrewMember"><span class="type-signature"></span>isValidCrewMember<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="addBag"><span class="type-signature"></span>addBag<span class="signature">(bag)</span><span class="type-signature"></span></h4>
     
 
     
@@ -256,7 +210,144 @@
 
 
 <div class="description">
-    Checks whether the name, position and staff number are all of valid, instantiated types
+    Adds a bag to the passenger object
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>bag</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Bag.html">Bag</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Person.js.html">Person.js</a>, <a href="Person.js.html#line30">line 30</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="isValidPerson"><span class="type-signature"></span>isValidPerson<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Checks whether the person has a valid name
 </div>
 
 
@@ -300,7 +391,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="CrewMember.js.html">CrewMember.js</a>, <a href="CrewMember.js.html#line26">line 26</a>
+        <a href="Person.js.html">Person.js</a>, <a href="Person.js.html#line21">line 21</a>
     </li></ul></dd>
     
 

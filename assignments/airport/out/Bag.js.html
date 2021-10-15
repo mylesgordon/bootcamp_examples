@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Airport.js</title>
+    <title>JSDoc: Source: Bag.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Airport.js</h1>
+    <h1 class="page-title">Source: Bag.js</h1>
 
     
 
@@ -29,55 +29,37 @@
             <pre class="prettyprint source linenums"><code>const { Check } = require("./Check");
 
 /**
- * A class to represent an airport
+ * Class to represent a passenger's luggage bag
  * @class
  */
-class Airport {
+class Bag {
   /**
-   * Contains all known airports
-   * @static
+   * Requires the weight of the bag as a parameter, which can be checked
+   * @param {number} weight
+   * @constructor
    */
-  static airports = [];
-  /**
-   * An airport requires a valid name
-   * @param {string} name
-   */
-  constructor(name) {
-    this.name = name;
-    this.planes = [];
-    this.airportID = this.constructor.airports.length;
-    this.isAirportValid();
-
-    this.constructor.airports.push(this);
+  constructor(weight) {
+    this.weight = weight;
+    this.isValidWeight();
   }
   /**
-   * Checks whether the airport name is a valid string
+   * Checks whether the passed weight is actually a valid number
    */
-  isAirportValid() {
-    if (!Check.isStringValid(this.name)) {
-      throw "Airport must have a valid name";
+  isValidWeight() {
+    if (!Check.isNumberValid(this.weight)) {
+      throw "Bag must have a valid weight";
     }
   }
   /**
-   * Handles when a specified plane take off, removing them from the planes array.
-   * @param {Plane} plane
+   * Checks whether the luggage is over an arbitrarily picked weight limit
+   * @returns {boolean}
    */
-  planeTakeOff(plane) {
-    this.planes = this.planes.filter(
-      (planeElement) => planeElement.planeID != plane.planeID
-    );
-  }
-  /**
-   * Handles when a plane arrives, adding them to the planes array.
-   * @param {Plane} plane
-   */
-  planeLand(plane) {
-    plane.airportID = this.airportID;
-    this.planes.push(plane);
+  isOverLimit() {
+    return this.weight >= 250;
   }
 }
 
-module.exports = { Airport };
+module.exports = { Bag };
 </code></pre>
         </article>
     </section>
