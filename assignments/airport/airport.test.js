@@ -3,6 +3,7 @@ const { Bag } = require("./Bag");
 const { CrewMember } = require("./CrewMember");
 const { Plane } = require("./Plane");
 const { Airport } = require("./Airport");
+const { Person } = require("./Person");
 
 describe("Bag", () => {
   let underLimitBag = null,
@@ -27,6 +28,12 @@ describe("Bag", () => {
   });
 });
 
+describe("Person", () => {
+  test("Empty name parameter throws error", () => {
+    expect(() => new Person()).toThrowError("Person requires a valid name");
+  });
+});
+
 describe("Passenger", () => {
   let validPassenger = null,
     testBag = null;
@@ -36,11 +43,6 @@ describe("Passenger", () => {
     testBag = new Bag(50);
   });
 
-  test("Empty name parameter throws error", () => {
-    expect(() => new Passenger("", "23409234", "1A")).toThrowError(
-      "Passenger is not valid."
-    );
-  });
   test("Empty passport number parameter throws error", () => {
     expect(() => new Passenger("Jeff", "", "1A")).toThrowError(
       "Passenger is not valid."
@@ -58,11 +60,6 @@ describe("Passenger", () => {
 });
 
 describe("Crew member", () => {
-  test("Empty name parameter throws error", () => {
-    expect(() => new CrewMember("", "Pilot", 2422)).toThrowError(
-      "Crew member is not valid."
-    );
-  });
   test("Empty position parameter throws error", () => {
     expect(() => new CrewMember("Jeff", "", 2422)).toThrowError(
       "Crew member is not valid."

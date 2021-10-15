@@ -1,10 +1,11 @@
 const { Check } = require("./Check");
+const { Person } = require("./Person");
 
 /**
  * Class to represent a singular passenger on a plane
  * @class
  */
-class Passenger {
+class Passenger extends Person {
   /**
    * A passenger requires a valid name, passport number and seat number to be on a plane.
    * @param {string} name
@@ -13,10 +14,9 @@ class Passenger {
    * @constructor
    */
   constructor(name, passportNumber, seatNumber) {
-    this.name = name;
+    super(name);
     this.passportNumber = passportNumber;
     this.seatNumber = seatNumber;
-    this.bags = [];
 
     this.isValidPassenger();
   }
@@ -30,13 +30,6 @@ class Passenger {
         throw "Passenger is not valid.";
       }
     });
-  }
-  /**
-   * Adds a bag to the passenger object
-   * @param {Bag} bag
-   */
-  addBag(bag) {
-    this.bags.push(bag);
   }
 }
 

@@ -1,10 +1,11 @@
 const { Check } = require("./Check");
+const { Person } = require("./Person");
 
 /**
  * Class to represent a crew member on an airplane
  * @class
  */
-class CrewMember {
+class CrewMember extends Person {
   /**
    * A crew member requires a valid name, position and staff number in order to be created.
    * @param {string} name
@@ -13,7 +14,7 @@ class CrewMember {
    * @constructor
    */
   constructor(name, position, staffNumber) {
-    this.name = name;
+    super(name);
     this.position = position;
     this.staffNumber = staffNumber;
 
