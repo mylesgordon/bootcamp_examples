@@ -133,13 +133,16 @@ class CrewMember {
   }
 }
 
-let planeID = 0;
-
 /**
  * A class to represent a plane at an airport
  * @class
  */
 class Plane {
+  /**
+   * Contains the next plane ID so that all planes can be uniquely identified
+   * @static
+   */
+  static sPlaneID = 0;
   /**
    * A plane requires a valid type, which is of type string
    * @param {string} type
@@ -148,7 +151,8 @@ class Plane {
   constructor(type) {
     this.type = type;
     this.passengers = [];
-    this.planeID = planeID++;
+    this.planeID = this.constructor.sPlaneID++;
+    this.airportID = -1;
 
     this.isPlaneValid();
   }
@@ -167,6 +171,20 @@ class Plane {
   board(passenger) {
     this.passengers.push(passenger);
   }
+  /**
+   * Flies the plane to the airport given the airport ID
+   * @param {number} airportID
+   */
+  flyTo(airportID) {
+    if (Airport.airports.length < airportID) {
+      throw "Cannot fly to non-existent airport";
+    }
+
+    if (this.airportID != -1) {
+      Airport.airports[this.airportID].planeTakeOff(this);
+    }
+    Airport.airports[airportID].planeLand(this);
+  }
 }
 
 /**
@@ -175,13 +193,21 @@ class Plane {
  */
 class Airport {
   /**
+   * Contains all known airports
+   * @static
+   */
+  static airports = [];
+  /**
    * An airport requires a valid name
    * @param {string} name
    */
   constructor(name) {
     this.name = name;
     this.planes = [];
+    this.airportID = this.constructor.airports.length;
     this.isAirportValid();
+
+    this.constructor.airports.push(this);
   }
   /**
    * Checks whether the airport name is a valid string
@@ -205,6 +231,7 @@ class Airport {
    * @param {Plane} plane
    */
   planeLand(plane) {
+    plane.airportID = this.airportID;
     this.planes.push(plane);
   }
 }
