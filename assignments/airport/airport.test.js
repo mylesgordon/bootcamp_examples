@@ -1,9 +1,9 @@
-const { Passenger } = require("./Passenger");
+const { Airport } = require("./Airport");
 const { Bag } = require("./Bag");
 const { CrewMember } = require("./CrewMember");
-const { Plane } = require("./Plane");
-const { Airport } = require("./Airport");
+const { Passenger } = require("./Passenger");
 const { Person } = require("./Person");
+const { Plane } = require("./Plane");
 
 describe("Bag", () => {
   let underLimitBag = null,
