@@ -16,7 +16,7 @@ class Check {
     }
   }
   /**
-   * Checks whether an inputted string is valid (not undefined/null & of the string)
+   * Checks whether an inputted string is valid (not undefined/null & of the string type)
    * @param {string} string
    * @returns {boolean}
    */
