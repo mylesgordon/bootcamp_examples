@@ -1,0 +1,12 @@
+{
+  "name": "scooter_hire",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "test": "jest",
+    "test:report": "jest --coverage=true"
+  }
+}
