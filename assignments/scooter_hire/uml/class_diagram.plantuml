@@ -5,6 +5,7 @@ class Server {
     + registerUser(user)
     + logIn(email, password)
     + chargeUser(userID, amount)
+    + addCity(city)
 }
 
 class User {
