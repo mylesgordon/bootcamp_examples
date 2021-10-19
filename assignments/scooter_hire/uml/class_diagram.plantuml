@@ -1,0 +1,54 @@
+@startuml
+class Server {
+    - users: array
+    + registerUser(user)
+    + logIn(email, password)
+    + chargeUser(userID, amount)
+}
+
+class User {
+    + userID: int
+    + name: string
+    + age: int
+    + email: string
+    + currentScooter: Scooter
+    - password: string
+    - bankNumber: int
+    - bankSortCode: int
+    + checkPassword(password)
+    + chargeBank(amount)
+}
+
+class Scooter {
+    + scooterID: int
+    + chargeAmount: int
+    + damaged: bool
+    + charge()
+    + driveSpecifiedKilometers(amount)
+    + markAsDamaged()
+    + isAvailable()
+    - isFullyCharged()
+}
+
+class ChargingStation {
+    + stationID: int
+    + stationName: string
+    - scooters: array
+    + getAvailableScooters()
+    + takeScooter()
+    + returnScooter(scooter)
+}
+
+class City {
+    + cityID: int
+    + name: string
+    + chargingStations: array
+    + findChargingStation(name)
+}
+
+Server *-- User : has many >
+City *-- ChargingStation : has many >
+ChargingStation o-- Scooter : may have many >
+User o-- Scooter : 0..1 >
+
+@enduml

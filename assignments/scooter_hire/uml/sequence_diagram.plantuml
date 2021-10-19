@@ -1,0 +1,41 @@
+@startuml
+
+actor User as User
+actor Scooter as Scooter
+entity ChargingStation as ChargingStation
+entity City as City
+database Server as Server
+
+User -> Server: Register user
+
+alt User is over 18
+Server --> User: User created
+else User is under 18
+Server --> User: Failed to create user
+end
+
+User -> City: Find charging station
+User -> ChargingStation: Check for available scooters
+
+alt Scooter is available
+ChargingStation --> Scooter: Check if scooter is undamaged and fully charged
+Scooter --> ChargingStation: Scooter is available
+ChargingStation --> User: Hire out scooter to user
+else Scooter is unavailable
+ChargingStation --> User: This charging station is empty, find another one
+end
+
+opt User breaks scooter
+User -> Scooter: Marks scooter as damaged
+Scooter --> User: Scooter is removed from user
+Scooter -> City: Maintenance personell triggered and scooter is repaired for 5 seconds
+City --> ChargingStation: Scooter is put into random charging station
+else Normal scooter ride
+User -> Scooter: Ride for certain distance
+User -> ChargingStation: Return scooter
+end
+
+ChargingStation --> User: Charge user's bank for using scooter
+Scooter -> ChargingStation: Scooter is unavailable until fully charged
+
+@enduml
