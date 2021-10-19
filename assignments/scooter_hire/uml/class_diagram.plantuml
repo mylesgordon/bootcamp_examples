@@ -1,6 +1,7 @@
 @startuml
 class Server {
     - users: array
+    + cities: array
     + registerUser(user)
     + logIn(email, password)
     + chargeUser(userID, amount)
