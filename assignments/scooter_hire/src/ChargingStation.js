@@ -1,3 +1,5 @@
+const { Scooter } = require("../src/Scooter");
+
 class ChargingStation {
   static currentStationID = 0;
 
@@ -8,5 +10,6 @@ class ChargingStation {
   }
   getAvailableScooters() {}
   takeScooter() {}
+  // TODO: make the name of this subroutine better
   returnScooter(scooter) {}
 }
