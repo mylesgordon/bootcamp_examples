@@ -1,0 +1,43 @@
+@startuml
+left to right direction
+actor User as User
+actor Scooter as Scooter 
+:App System: as App
+
+package "Scooter Hiring System" {
+    usecase "Register details" as Register
+    usecase "Hire scooter" as Hire 
+    usecase "Return scooter" as Return 
+    usecase "Pay for scooter" as Pay 
+    usecase "Mark scooter as broken" as Break 
+    usecase "Remove from list of available scooters" as RemoveScooter 
+    usecase "Maintenance maintenance personell to fix" as Maintenance 
+    usecase "Charge scooter until fully charged" as Charge 
+}
+
+User --> Register
+App <-- Register
+
+User --> Hire 
+App <-- Hire 
+
+User --> Return 
+App <-- Return 
+
+Pay <|-- Return
+User --> Pay 
+App <-- Pay 
+
+User --> Break 
+App <-- Break 
+
+RemoveScooter <|-- Break 
+App <-- RemoveScooter 
+
+Maintenance <|-- RemoveScooter
+App <-- Maintenance
+
+User --> Charge
+App <-- Charge
+
+@enduml
