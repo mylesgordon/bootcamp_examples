@@ -38,7 +38,7 @@ class ChargingStation {
     - scooters: array
     + getAvailableScooters()
     + takeScooter()
-    + returnScooter(scooter)
+    + addScooter(scooter)
 }
 
 class City {

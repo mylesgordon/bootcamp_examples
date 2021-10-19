@@ -30,8 +30,7 @@ class ChargingStation {
 
     return available[0];
   }
-  // TODO: make the name of this subroutine better
-  returnScooter(scooter) {
+  addScooter(scooter) {
     this.scooters.push(scooter);
   }
 }

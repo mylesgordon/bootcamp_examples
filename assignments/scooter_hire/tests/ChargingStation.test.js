@@ -21,15 +21,15 @@ describe("Charging Station", () => {
   });
 
   test("Adding a new scooter to a station should behave as expected", () => {
-    station.returnScooter(scooter);
+    station.addScooter(scooter);
     expect(station.scooters.length).toBe(1);
   });
 
   test("Getting all available scooters", () => {
     brokenScooter.markAsDamaged();
     chargingScooter.chargeAmount = 5;
-    station.returnScooter(brokenScooter);
-    station.returnScooter(chargingScooter);
+    station.addScooter(brokenScooter);
+    station.addScooter(chargingScooter);
 
     const availableScooters = station.getAvailableScooters();
     expect(availableScooters.length).toBe(1);
