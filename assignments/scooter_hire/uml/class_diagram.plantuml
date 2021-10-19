@@ -45,6 +45,7 @@ class City {
     + cityID: int
     + name: string
     + chargingStations: array
+    + addChargingStation(station)
     + findChargingStation(name)
 }
 
