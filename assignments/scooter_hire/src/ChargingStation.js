@@ -8,8 +8,30 @@ class ChargingStation {
     this.stationName = name;
     this.scooters = [];
   }
-  getAvailableScooters() {}
-  takeScooter() {}
+  getAvailableScooters() {
+    const available = [];
+    this.scooters.forEach((scooter) => {
+      if (scooter.isAvailable()) {
+        available.push(scooter);
+      }
+    });
+
+    return available;
+  }
+  takeScooter() {
+    const available = this.getAvailableScooters();
+    if (available.length === 0) {
+      return null;
+    }
+
+    this.scooters = this.scooters.filter((scooter) => {
+      scooter.scooterID != available[0].scooterID;
+    });
+
+    return available[0];
+  }
   // TODO: make the name of this subroutine better
-  returnScooter(scooter) {}
+  returnScooter(scooter) {
+    this.scooters.push(scooter);
+  }
 }

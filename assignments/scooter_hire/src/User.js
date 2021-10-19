@@ -11,6 +11,10 @@ class User {
     this.bankNumber = bankNumber;
     this.bankSortCode = bankSortCode;
   }
-  checkPassword(password) {}
-  chargeBank(amount) {}
+  checkPassword(password) {
+    return password === this.password;
+  }
+  chargeBank(amount) {
+    console.log(`${this.name}'s bank has been charged £${amount}`);
+  }
 }

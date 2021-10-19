@@ -6,6 +6,16 @@ class City {
     this.name = name;
     this.chargingStations = [];
   }
-  addChargingStation(station) {}
-  findChargingStation(name) {}
+  addChargingStation(station) {
+    this.chargingStations.push(station);
+  }
+  findChargingStation(name) {
+    return this.chargingStations.find((station) => {
+      if (station.name === name) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
 }
