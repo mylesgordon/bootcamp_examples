@@ -1,7 +1,19 @@
 class Server {
+  static instance = null;
+
   constructor() {
     this.users = [];
     this.cities = [];
+  }
+  static createInstance() {
+    let obj = new Server();
+    return obj;
+  }
+  static getInstance() {
+    if (this.instance === null) {
+      this.instance = this.createInstance();
+    }
+    return this.instance;
   }
   registerUser(user) {
     this.users.push(user);

@@ -1,7 +1,10 @@
 @startuml
 class Server {
+    - static instance: Server
     - users: array
     + cities: array
+    + getInstance()
+    - createInstance()
     + registerUser(user)
     + logIn(email, password)
     + chargeUser(userID, amount)
