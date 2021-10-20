@@ -27,3 +27,5 @@ class Server {
     this.cities.push(city);
   }
 }
+
+module.exports = { Server };

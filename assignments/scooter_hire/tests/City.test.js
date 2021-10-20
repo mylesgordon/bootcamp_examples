@@ -2,7 +2,7 @@ const { City } = require("../src/City");
 const { ChargingStation } = require("../src/ChargingStation");
 
 describe("City", () => {
-  const city = null,
+  let city = null,
     station = null;
 
   beforeAll(() => {
@@ -26,6 +26,6 @@ describe("City", () => {
 
   test("Finding a charging station by name should behave as expected", () => {
     const foundStation = city.findChargingStation("Station");
-    expect(foundStation.name).toBe("Station");
+    expect(foundStation.stationName).toBe("Station");
   });
 });

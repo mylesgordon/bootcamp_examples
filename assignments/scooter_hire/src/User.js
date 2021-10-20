@@ -18,3 +18,5 @@ class User {
     console.log(`${this.name}'s bank has been charged £${amount}`);
   }
 }
+
+module.exports = { User };

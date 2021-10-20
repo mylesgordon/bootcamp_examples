@@ -5,13 +5,17 @@ class City {
     this.cityID = this.constructor.currentCityID++;
     this.name = name;
     this.chargingStations = [];
+
+    if (this.name === undefined || this.name.length === 0) {
+      throw "A city requires a name";
+    }
   }
   addChargingStation(station) {
     this.chargingStations.push(station);
   }
   findChargingStation(name) {
     return this.chargingStations.find((station) => {
-      if (station.name === name) {
+      if (station.stationName === name) {
         return true;
       } else {
         return false;
@@ -19,3 +23,5 @@ class City {
     });
   }
 }
+
+module.exports = { City };

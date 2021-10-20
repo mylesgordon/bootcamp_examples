@@ -16,7 +16,7 @@ describe("Charging Station", () => {
 
   test("Initial state of station is valid", () => {
     expect(station.stationID).toBe(0);
-    expect(station.name).toBe("Jeff Street");
+    expect(station.stationName).toBe("Jeff Street");
     expect(station.scooters.length).toBe(0);
   });
 

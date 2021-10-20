@@ -34,3 +34,5 @@ class ChargingStation {
     this.scooters.push(scooter);
   }
 }
+
+module.exports = { ChargingStation };

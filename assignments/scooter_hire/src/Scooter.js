@@ -32,3 +32,5 @@ class Scooter {
     return this.chargeAmount >= 100;
   }
 }
+
+module.exports = { Scooter };
