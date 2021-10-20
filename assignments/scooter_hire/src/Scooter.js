@@ -7,7 +7,7 @@ class Scooter {
     this.damaged = false;
   }
   async charge() {
-    console.log(`Charging scooter (ID: ${this.scooterID}`);
+    console.log(`Charging scooter (ID: ${this.scooterID})`);
     await new Promise((resolve) => setTimeout(resolve, 2000));
     this.chargeAmount = 100;
     console.log(`Scooter ${this.scooterID} is now fully charged`);
