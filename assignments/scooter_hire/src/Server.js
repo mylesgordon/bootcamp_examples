@@ -43,17 +43,21 @@ class Server {
 
     let found = false;
     this.cities.every((city) => {
-      if (found) {
-        return false;
-      }
-
       city.chargingStations.every((station) => {
         if (station.stationID === stationID) {
           stationReturn = station;
           found = true;
           return false;
+        } else {
+          return true;
         }
       });
+
+      if (found) {
+        return false;
+      } else {
+        return true;
+      }
     });
 
     return stationReturn;
