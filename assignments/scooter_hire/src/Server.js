@@ -40,10 +40,18 @@ class Server {
   }
   findChargingStation(stationID) {
     let stationReturn = null;
-    this.cities.forEach((city) => {
-      city.chargingStations.forEach((station) => {
+
+    let found = false;
+    this.cities.every((city) => {
+      if (found) {
+        return false;
+      }
+
+      city.chargingStations.every((station) => {
         if (station.stationID === stationID) {
           stationReturn = station;
+          found = true;
+          return false;
         }
       });
     });
@@ -51,12 +59,19 @@ class Server {
     return stationReturn;
   }
   updateChargingStation(newStation) {
+    let found = false;
     for (let x = 0; x < this.cities.length; x++) {
+      if (found) {
+        break;
+      }
+
       for (let y = 0; y < this.cities[x].chargingStations.length; y++) {
         if (
           this.cities[x].chargingStations[y].stationID === newStation.stationID
         ) {
           this.cities[x].chargingStations[y] = newStation;
+          found = true;
+          break;
         }
       }
     }
