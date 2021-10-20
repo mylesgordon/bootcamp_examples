@@ -47,17 +47,12 @@ class Server {
         if (station.stationID === stationID) {
           stationReturn = station;
           found = true;
-          return false;
-        } else {
-          return true;
         }
+
+        return !found;
       });
 
-      if (found) {
-        return false;
-      } else {
-        return true;
-      }
+      return !found;
     });
 
     return stationReturn;
