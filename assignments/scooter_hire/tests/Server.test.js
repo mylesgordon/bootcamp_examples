@@ -1,5 +1,6 @@
 const { ChargingStation } = require("../src/ChargingStation");
 const { City } = require("../src/City");
+const { Scooter } = require("../src/Scooter");
 const { Server } = require("../src/Server");
 const { User } = require("../src/User");
 
@@ -50,5 +51,15 @@ describe("Server", () => {
     server.updateChargingStation(station);
 
     expect(server.cities[0].chargingStations[0].stationName).toBe("NewName");
+  });
+
+  test("Breaking a scooter works as expected", async () => {
+    const scooter = new Scooter();
+    scooter.fromStation = 0;
+
+    await server.scooterDamaged(scooter);
+    expect(
+      server.cities[0].chargingStations[0].scooters[0].isAvailable()
+    ).toBeTruthy();
   });
 });

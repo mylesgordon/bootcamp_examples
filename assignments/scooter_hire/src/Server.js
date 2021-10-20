@@ -88,7 +88,7 @@ class Server {
       "Scooter has been marked as damaged... Maintenance has been informed"
     );
 
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     scooter.markAsFixed();
     station.addScooter(scooter);
     this.updateChargingStation(station);

@@ -1,3 +1,5 @@
+const { Server } = require("./Server");
+
 class User {
   static currentUserID = 0;
 
@@ -10,6 +12,10 @@ class User {
     this.password = password;
     this.bankNumber = bankNumber;
     this.bankSortCode = bankSortCode;
+  }
+  breakScooter() {
+    Server.getInstance().scooterDamaged(scooter);
+    this.currentScooter = null;
   }
   checkPassword(password) {
     return password === this.password;
