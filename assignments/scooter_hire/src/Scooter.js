@@ -5,6 +5,7 @@ class Scooter {
     this.scooterID = this.constructor.currentScooterID++;
     this.chargeAmount = 100;
     this.damaged = false;
+    this.fromStation = null;
   }
   async charge() {
     console.log(`Charging scooter (ID: ${this.scooterID})`);
@@ -25,11 +26,17 @@ class Scooter {
   markAsDamaged() {
     this.damaged = true;
   }
+  markAsFixed() {
+    this.damaged = false;
+  }
   isAvailable() {
     return this.isFullyCharged() && !this.damaged;
   }
   isFullyCharged() {
     return this.chargeAmount >= 100;
+  }
+  markFrom(stationName) {
+    this.fromStation = stationName;
   }
 }
 
