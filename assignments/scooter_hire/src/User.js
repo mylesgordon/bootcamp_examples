@@ -13,8 +13,8 @@ class User {
     this.bankNumber = bankNumber;
     this.bankSortCode = bankSortCode;
   }
-  breakScooter() {
-    Server.getInstance().scooterDamaged(scooter);
+  async breakScooter() {
+    await Server.getInstance().scooterDamaged(this.currentScooter);
     this.currentScooter = null;
   }
   checkPassword(password) {

@@ -28,11 +28,10 @@ class ChargingStation {
       scooter.scooterID != available[0].scooterID;
     });
 
-    available[0].markFrom(this.stationName);
-
     return available[0];
   }
   addScooter(scooter) {
+    scooter.fromStation = this.stationID;
     this.scooters.push(scooter);
   }
 }
