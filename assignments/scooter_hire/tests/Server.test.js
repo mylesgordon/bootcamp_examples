@@ -59,10 +59,12 @@ describe("Server", () => {
   });
 
   test("Breaking a scooter works as expected", async () => {
+    jest.useFakeTimers();
     const scooter = new Scooter();
     scooter.fromStation = 0;
 
-    await server.scooterDamaged(scooter);
+    server.scooterDamaged(scooter);
+    await jest.runAllTimers();
     expect(
       server.cities[0].chargingStations[0].scooters[0].isAvailable()
     ).toBeTruthy();

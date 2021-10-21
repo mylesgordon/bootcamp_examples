@@ -17,7 +17,9 @@ describe("Scooter", () => {
   });
 
   test("Charging", async () => {
-    await scooter.charge();
+    jest.useFakeTimers();
+    scooter.charge();
+    await jest.runAllTimers();
   });
 
   test("Driving a certain distance takes off the correct battery percentage", () => {
