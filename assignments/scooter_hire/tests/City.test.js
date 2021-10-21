@@ -27,5 +27,6 @@ describe("City", () => {
   test("Finding a charging station by name should behave as expected", () => {
     const foundStation = city.findChargingStation("Station");
     expect(foundStation.stationName).toBe("Station");
+    expect(city.findChargingStation("wrong name")).toBeUndefined();
   });
 });

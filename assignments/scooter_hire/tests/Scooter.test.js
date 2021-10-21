@@ -36,4 +36,9 @@ describe("Scooter", () => {
     expect(scooter.isAvailable()).toBeFalsy();
     scooter.damaged = false;
   });
+
+  test("Marking a scooter as being from a certain location should work as expected", () => {
+    scooter.markFrom(234);
+    expect(scooter.fromStation).toBe(234);
+  });
 });

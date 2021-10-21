@@ -31,7 +31,7 @@ class ChargingStation {
     return available[0];
   }
   addScooter(scooter) {
-    scooter.fromStation = this.stationID;
+    scooter.markFrom(this.stationID);
     this.scooters.push(scooter);
   }
 }
