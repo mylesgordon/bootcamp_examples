@@ -7,22 +7,12 @@ const { User } = require("../src/User");
 describe("Server", () => {
   let chargingStation = null,
     city = null,
-    server = null,
-    user = null;
+    server = null;
 
   beforeAll(() => {
     chargingStation = new ChargingStation("Station");
     city = new City("City");
     server = Server.getInstance();
-    user = new User(
-      "user",
-      20,
-      "email@email.com",
-      "password",
-      2342,
-      "20-20-20"
-    );
-
     server.cities.push(city);
     server.cities[0].chargingStations.push(chargingStation);
   });
