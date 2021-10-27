@@ -10,9 +10,9 @@ const Restaurant = sequelize.define("Restaurant", restaurantModel);
 const Menu = sequelize.define("Menu", menuModel);
 const MenuItem = sequelize.define("MenuItem", menuItemModel);
 
-Menu.belongsTo(Restaurant);
-MenuItem.belongsTo(Menu);
 Restaurant.hasMany(Menu);
+Menu.belongsTo(Restaurant);
 Menu.hasMany(MenuItem);
+MenuItem.belongsTo(Menu);
 
 module.exports = { sequelize, Restaurant, Menu, MenuItem };
