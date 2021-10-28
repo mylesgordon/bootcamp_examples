@@ -43,8 +43,17 @@ app.get("/get_object", (req, res) => {
 });
 
 app.post("/submit_counter", (req, res) => {
-  counter = req.body.counterText;
-  res.send("Counter has been updated.");
+  const counterText = req.body.counterText;
+  if (
+    counterText === undefined ||
+    counterText.length === 0 ||
+    isNaN(counterText)
+  ) {
+    res.send("Counter request was unsuccessful");
+  } else {
+    counter = counterText;
+    res.send("Counter has been updated.");
+  }
 });
 
 app.listen(port, () => {
