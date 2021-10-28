@@ -1,12 +1,21 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 const port = 3001;
 
 let counter = 0;
 
 app.get("/", (req, res) => {
   res.send(
-    `Welcome to the route of the website. You are visitor number ${++counter}`
+    `Welcome to the route of the website. You are visitor number ${++counter}.
+    To submit a counter number, type in below:
+    <form name="counterform" method="POST" action="/submit_counter">
+        <input type="text" name="counterText"/>
+        <input type="submit" value="Submit">
+    </form>`
   );
 });
 
@@ -31,6 +40,11 @@ app.get("/get_object", (req, res) => {
       counter: counter,
     });
   }
+});
+
+app.post("/submit_counter", (req, res) => {
+  counter = req.body.counterText;
+  res.send("Counter has been updated.");
 });
 
 app.listen(port, () => {
