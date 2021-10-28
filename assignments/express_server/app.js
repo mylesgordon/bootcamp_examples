@@ -1,16 +1,18 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+// depricated but works still
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(express.static("public"));
 const port = 3001;
 
 let counter = 0;
 
-app.get("/", (req, res) => {
+app.get("/main", (req, res) => {
   res.send(
-    `Welcome to the route of the website. You are visitor number ${++counter}.
+    `You are visitor number ${++counter}.
     To submit a counter number, type in below:
     <form name="counterform" method="POST" action="/submit_counter">
         <input type="text" name="counterText"/>
