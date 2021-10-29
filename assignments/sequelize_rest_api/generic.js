@@ -21,6 +21,22 @@ async function fetchAllResources(resourceType, response) {
   }
 }
 
+async function fetchResourceByID(resourceType, request, response) {
+  try {
+    const resource = await resourceType.findOne({
+      where: { id: request.params.id },
+    });
+
+    if (resource === null) {
+      throw new Error(`Resource ID ${request.params.id} not found`);
+    }
+
+    response.status(201).send(resource);
+  } catch (error) {
+    response.status(400).send(error.message);
+  }
+}
+
 async function deleteResource(resourceType, request, response) {
   try {
     const resourceOnTheBlock = await resourceType.findOne({
@@ -40,4 +56,9 @@ async function deleteResource(resourceType, request, response) {
   }
 }
 
-module.exports = { createResource, fetchAllResources, deleteResource };
+module.exports = {
+  createResource,
+  fetchAllResources,
+  fetchResourceByID,
+  deleteResource,
+};

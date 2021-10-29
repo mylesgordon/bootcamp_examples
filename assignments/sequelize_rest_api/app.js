@@ -3,6 +3,7 @@ const express = require("express");
 const {
   createResource,
   fetchAllResources,
+  fetchResourceByID,
   deleteResource,
 } = require("./generic");
 const { sequelize, Restaurant, Menu, MenuItem } = require("./connection");
@@ -28,6 +29,10 @@ app.post(restaurauntPath, async (req, res) => {
 
 app.get(restaurauntPath, async (req, res) => {
   await fetchAllResources(Restaurant, res);
+});
+
+app.get(restaurauntPath + "/:id", async (req, res) => {
+  await fetchResourceByID(Restaurant, req, res);
 });
 
 app.delete(restaurauntPath, async (req, res) => {
@@ -85,8 +90,33 @@ app.get(menuPath, async (req, res) => {
   await fetchAllResources(Menu, res);
 });
 
+app.get(menuPath + "/:id", async (req, res) => {
+  await fetchResourceByID(Menu, req, res);
+});
+
 app.delete(menuPath, async (req, res) => {
   await deleteResource(Menu, req, res);
+});
+
+app.put(menuPath, async (req, res) => {
+  try {
+    const menuToBeUpdated = await Menu.findOne({
+      where: { id: req.body.id },
+    });
+
+    if (menuToBeUpdated === null) {
+      res.status(404).send("Menu was not found.");
+    } else {
+      if (req.body.title) {
+        menuToBeUpdated.title = req.body.title;
+      }
+
+      menuToBeUpdated.save();
+      res.status(201).send(`Menu ${menuToBeUpdated.title} updated.`);
+    }
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
 });
 
 // Entry point
