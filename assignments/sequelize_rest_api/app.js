@@ -1,5 +1,10 @@
 // Set up
 const express = require("express");
+const {
+  createResource,
+  fetchAllResources,
+  deleteResource,
+} = require("./generic");
 const { sequelize, Restaurant, Menu, MenuItem } = require("./connection");
 
 const app = express();
@@ -7,6 +12,7 @@ const port = 3002;
 app.use(express.json());
 
 const restaurauntPath = "/api/restaurant";
+const menuPath = "/api/menu";
 
 // Functions/routing
 async function start() {
@@ -15,48 +21,9 @@ async function start() {
   });
 }
 
-// generic
-async function createResource(resourceType, request, response) {
-  try {
-    const newResource = await resourceType.create(request.body);
-
-    response.status(201).send(newResource);
-  } catch (error) {
-    response.status(400).send(error.message);
-  }
-}
-
-async function fetchAllResources(resourceType, response) {
-  try {
-    const resources = await resourceType.findAll({});
-    response.status(201).send(resources);
-  } catch (error) {
-    response.status(400).send(error.message);
-  }
-}
-
-async function deleteResource(resourceType, request, response) {
-  try {
-    const resourceOnTheBlock = await resourceType.findOne({
-      where: { id: request.body.id },
-    });
-
-    if (resourceOnTheBlock === null) {
-      response.status(404).send("Resource was not found.");
-    } else {
-      resourceOnTheBlock.destroy();
-      response
-        .status(201)
-        .send(`Resource with ID ${resourceOnTheBlock.id} deleted.`);
-    }
-  } catch (error) {
-    response.status(400).send(error.message);
-  }
-}
-
 // restauraunt
 app.post(restaurauntPath, async (req, res) => {
-  await createResource(Restaurant, req, res);
+  await createResource(Restaurant, req, res, true);
 });
 
 app.get(restaurauntPath, async (req, res) => {
@@ -93,6 +60,34 @@ app.put(restaurauntPath, async (req, res) => {
 });
 
 // Menu
+app.post(menuPath, async (req, res) => {
+  try {
+    if (!req.body.restaurauntID) {
+      throw "Restauraunt ID field required";
+    }
+
+    const restaurauntId = req.body.restaurauntID;
+    delete req.body.restaurauntID;
+
+    const menu = await createResource(Menu, req, res, false);
+    const restauraunt = await Restaurant.findOne({
+      where: { id: restaurauntId },
+    });
+
+    restauraunt.addMenu(menu);
+    res.status(200).send(`Menu ${req.body.title} created`);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
+app.get(menuPath, async (req, res) => {
+  await fetchAllResources(Menu, res);
+});
+
+app.delete(menuPath, async (req, res) => {
+  await deleteResource(Menu, req, res);
+});
 
 // Entry point
 start()
