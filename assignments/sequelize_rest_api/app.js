@@ -15,42 +15,56 @@ async function start() {
   });
 }
 
+// generic
+async function createResource(resourceType, request, response) {
+  try {
+    const newResource = await resourceType.create(request.body);
+
+    response.status(201).send(newResource);
+  } catch (error) {
+    response.status(400).send(error.message);
+  }
+}
+
+async function fetchAllResources(resourceType, response) {
+  try {
+    const resources = await resourceType.findAll({});
+    response.status(201).send(resources);
+  } catch (error) {
+    response.status(400).send(error.message);
+  }
+}
+
+async function deleteResource(resourceType, request, response) {
+  try {
+    const resourceOnTheBlock = await resourceType.findOne({
+      where: { id: request.body.id },
+    });
+
+    if (resourceOnTheBlock === null) {
+      response.status(404).send("Resource was not found.");
+    } else {
+      resourceOnTheBlock.destroy();
+      response
+        .status(201)
+        .send(`Resource with ID ${resourceOnTheBlock.id} deleted.`);
+    }
+  } catch (error) {
+    response.status(400).send(error.message);
+  }
+}
+
 // restauraunt
 app.post(restaurauntPath, async (req, res) => {
-  try {
-    const newRestaurant = await Restaurant.create(req.body);
-
-    res.status(201).send(newRestaurant);
-  } catch (err) {
-    res.status(400).send(err.message);
-  }
+  await createResource(Restaurant, req, res);
 });
 
 app.get(restaurauntPath, async (req, res) => {
-  try {
-    const restauraunts = await Restaurant.findAll({});
-
-    res.status(201).send(restauraunts);
-  } catch (err) {
-    res.status(400).send(err.message);
-  }
+  await fetchAllResources(Restaurant, res);
 });
 
 app.delete(restaurauntPath, async (req, res) => {
-  try {
-    const restaurauntOnTheBlock = await Restaurant.findOne({
-      where: { id: req.body.id },
-    });
-
-    if (restaurauntOnTheBlock === null) {
-      res.status(404).send("Restaurant was not found.");
-    } else {
-      restaurauntOnTheBlock.destroy();
-      res.status(201).send(`Restaurant ${restaurauntOnTheBlock.name} deleted.`);
-    }
-  } catch (err) {
-    res.status(400).send(err.message);
-  }
+  await deleteResource(Restaurant, req, res);
 });
 
 app.put(restaurauntPath, async (req, res) => {
@@ -77,6 +91,8 @@ app.put(restaurauntPath, async (req, res) => {
     res.status(400).send(err.message);
   }
 });
+
+// Menu
 
 // Entry point
 start()
