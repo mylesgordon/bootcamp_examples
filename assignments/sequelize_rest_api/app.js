@@ -15,6 +15,7 @@ async function start() {
   });
 }
 
+// restauraunt
 app.post(restaurauntPath, async (req, res) => {
   try {
     const newRestaurant = await Restaurant.create(req.body);
