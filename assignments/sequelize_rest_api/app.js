@@ -63,7 +63,7 @@ app.put(restaurauntPath, async (req, res) => {
 app.post(menuPath, async (req, res) => {
   try {
     if (!req.body.restaurauntID) {
-      throw "Restauraunt ID field required";
+      throw new Error("Restauraunt ID field required");
     }
 
     const restaurauntId = req.body.restaurauntID;
