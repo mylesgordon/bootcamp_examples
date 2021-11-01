@@ -23,9 +23,9 @@ class Resource {
 
   static async fetchAllResources(resourceType, request, response) {
     try {
-      let orderArray = ["id", "ASC"];
+      let orderArray = ["id", "ASC"],
+        orderField = "id";
       const orderBy = request.query.orderBy;
-      let orderField = "id";
 
       if (typeof orderBy != "undefined") {
         if (typeof request.query.field != "undefined") {
