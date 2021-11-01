@@ -6,7 +6,7 @@ class MenuResource extends Resource {
     await super.deleteResource(Menu, req, res);
   }
   static async getAll(req, res) {
-    await super.fetchAllResources(Menu, res);
+    await super.fetchAllResources(Menu, req, res);
   }
   static async getByID(req, res) {
     await super.fetchResourceByID(Menu, req, res);

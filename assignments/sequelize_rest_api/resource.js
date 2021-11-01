@@ -21,9 +21,22 @@ class Resource {
     }
   }
 
-  static async fetchAllResources(resourceType, response) {
+  static async fetchAllResources(resourceType, request, response) {
     try {
-      const resources = await resourceType.findAll({});
+      let orderArray = ["id", "ASC"];
+      const orderBy = request.query.orderBy;
+      let orderField = "id";
+
+      if (typeof orderBy != "undefined") {
+        if (typeof request.query.field != "undefined") {
+          orderField = request.query.field;
+        }
+      }
+
+      orderArray = [orderField, orderBy];
+      const resources = await resourceType.findAll({
+        order: [orderArray],
+      });
       response.status(201).send(resources);
     } catch (error) {
       response.status(400).send(error.message);

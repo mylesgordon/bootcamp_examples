@@ -6,7 +6,7 @@ class RestaurauntResource extends Resource {
     await super.deleteResource(Restaurant, req, res);
   }
   static async getAll(req, res) {
-    await super.fetchAllResources(Restaurant, res);
+    await super.fetchAllResources(Restaurant, req, res);
   }
   static async getByID(req, res) {
     await super.fetchResourceByID(Restaurant, req, res);
