@@ -45,16 +45,25 @@ app.put(menuItemPath, MenuItemResource.put);
 const { Menu, MenuItem } = require("./connection");
 
 app.get("/api/restaurant/:id/menu", async (req, res) => {
-  const menus = await Menu.findAll({ where: { RestaurantId: req.params.id } });
-  res.status(201).send(menus);
+  try {
+    const menus = await Menu.findAll({
+      where: { RestaurantId: req.params.id },
+    });
+    res.status(201).send(menus);
+  } catch (error) {
+    res.status(400).send(error);
+  }
 });
 
 app.get("/api/menu/:menuId/item/:itemId", async (req, res) => {
-  const item = await MenuItem.findOne({
-    where: { id: req.params.itemId, MenuId: req.params.menuId },
-  });
-
-  res.status(201).send(item);
+  try {
+    const item = await MenuItem.findOne({
+      where: { id: req.params.itemId, MenuId: req.params.menuId },
+    });
+    res.status(201).send(item);
+  } catch (error) {
+    res.status(400).send(error);
+  }
 });
 
 // Entry point
