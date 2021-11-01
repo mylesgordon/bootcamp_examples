@@ -8,10 +8,8 @@ const express = require("express"),
 const app = express(),
   port = 3002,
   restaurauntPath = "/api/restaurant",
-  menuItemPath = "/api/menuItem",
-  menuItemPathAlt = "/api/menu/:id/menuItem",
-  menuPath = "/api/menu",
-  menuPathAlt = "/api/restaurant/:id/menu";
+  menuItemPath = "/api/item",
+  menuPath = "/api/menu";
 
 app.use(express.json());
 
@@ -42,6 +40,22 @@ app.get(menuItemPath, MenuItemResource.getAll);
 app.get(menuItemPath + "/:id", MenuItemResource.getByID);
 app.delete(menuItemPath, MenuItemResource.delete);
 app.put(menuItemPath, MenuItemResource.put);
+
+// Extra routes (generic class approach didn't work well for this)
+const { Menu, MenuItem } = require("./connection");
+
+app.get("/api/restaurant/:id/menu", async (req, res) => {
+  const menus = await Menu.findAll({ where: { RestaurantId: req.params.id } });
+  res.status(201).send(menus);
+});
+
+app.get("/api/menu/:menuId/item/:itemId", async (req, res) => {
+  const item = await MenuItem.findOne({
+    where: { id: req.params.itemId, MenuId: req.params.menuId },
+  });
+
+  res.status(201).send(item);
+});
 
 // Entry point
 start()
