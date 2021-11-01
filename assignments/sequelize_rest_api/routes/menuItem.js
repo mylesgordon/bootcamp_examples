@@ -1,4 +1,4 @@
-const { MenuItem, Restaurant } = require("../connection"),
+const { Menu, MenuItem } = require("../connection"),
   { Resource } = require("../resource");
 
 class MenuItemResource extends Resource {
