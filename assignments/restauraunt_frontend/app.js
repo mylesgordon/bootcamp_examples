@@ -1,6 +1,6 @@
 const express = require("express");
-const { indexRoute } = require("./routes");
 const handlebars = require("./handlebars");
+const { indexRoute, restaurantRoute } = require("./routes");
 
 const app = express();
 
@@ -15,6 +15,7 @@ app.use(express.static("public"));
 
 // routes
 app.use("/", indexRoute);
+app.use("/restaurants", restaurantRoute);
 
 app.listen(80, () => {
   console.log("Frontend running on port 80");
