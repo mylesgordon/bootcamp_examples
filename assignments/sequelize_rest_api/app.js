@@ -66,6 +66,18 @@ app.get("/api/menu/:menuId/item/:itemId", async (req, res) => {
   }
 });
 
+app.get("/api/menu/:menuId/items", async (req, res) => {
+  try {
+    const items = await MenuItem.findAll({
+      where: { MenuId: req.params.menuId },
+    });
+    res.status(201).send(items);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+});
+
 // Entry point
 start()
   .then(() => console.log("Sequelize started"))

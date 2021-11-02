@@ -20,10 +20,10 @@ class MenuItemResource extends Resource {
       const menuID = req.body.menuID;
       delete req.body.menuID;
 
-      const menuItem = await super.createResource(MenuItem, req, res, false);
       const menu = await Menu.findOne({
         where: { id: menuID },
       });
+      const menuItem = await super.createResource(MenuItem, req, res, false);
 
       menu.addMenuItem(menuItem);
       res.status(200).send(`Menu item ${req.body.name} created`);
