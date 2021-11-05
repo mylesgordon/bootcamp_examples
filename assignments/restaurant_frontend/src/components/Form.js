@@ -20,15 +20,12 @@ const Form = ({ method, id }) => {
       idTemplate = `, "id": ${id}`;
     }
 
-    const body = `{${template} ${idTemplate}}`;
-    console.log(body);
-
     fetch("http://localhost:3002/api/restaurant", {
       method: method,
       headers: {
         "Content-Type": "application/json",
       },
-      body: body,
+      body: `{${template} ${idTemplate}}`,
     }).catch((error) => console.error(error));
   };
 
