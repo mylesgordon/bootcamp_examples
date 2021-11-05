@@ -1,5 +1,6 @@
 import Restauraunts from "./components/Restaurants";
 import Menu from "./components/Menu";
+import Forms from "./components/Forms";
 import { useState } from "react";
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
       <Restauraunts updateMenu={updateMenu} />
       <hr />
       <Menu menus={menu} />
+      <hr />
+      <Forms />
     </div>
   );
 }
